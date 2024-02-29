@@ -22,8 +22,29 @@ public class CarInsurance {
      * or YearsWithoutDamage > age-18.
      */
     public double calculatePremium(int age, boolean isWoman, int yearsWithoutDamage) {
-        //TODO
-        return 0;
+        double actualPremium = basisPremium;
+
+        if (age < 18 || yearsWithoutDamage < 0 || yearsWithoutDamage > age - 18) {
+            throw new RuntimeException();
+        }
+        if (age < 25) {
+            actualPremium *= 1.25;
+        }
+        if (yearsWithoutDamage > 8) {
+            actualPremium *= 0.65;
+        } else if (yearsWithoutDamage >= 6) {
+            actualPremium *= 0.75;
+        } else if (yearsWithoutDamage >= 3) {
+            actualPremium *= 0.85;
+        }
+
+        if (isWoman) {
+            actualPremium *= 0.95;
+        }
+
+
+
+        return actualPremium;
     }
 }
 
